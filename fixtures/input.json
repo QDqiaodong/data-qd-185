@@ -1,0 +1,70 @@
+{
+  "inputs": [
+    "a"
+  ],
+  "gates": [
+    {
+      "id": "toggle",
+      "op": "XOR",
+      "args": [
+        "a",
+        "q"
+      ]
+    },
+    {
+      "id": "visible",
+      "op": "BUF",
+      "args": [
+        "q"
+      ]
+    }
+  ],
+  "flops": [
+    {
+      "id": "q",
+      "d": "toggle",
+      "initial": "0"
+    }
+  ],
+  "outputs": [
+    "visible"
+  ],
+  "vectors": [
+    {
+      "id": "step-0",
+      "inputs": {
+        "a": "1"
+      },
+      "expect": {
+        "visible": "0"
+      }
+    },
+    {
+      "id": "step-1",
+      "inputs": {
+        "a": "0"
+      },
+      "expect": {
+        "visible": "1"
+      }
+    },
+    {
+      "id": "step-2",
+      "inputs": {
+        "a": "1"
+      },
+      "expect": {
+        "visible": "1"
+      }
+    },
+    {
+      "id": "step-3",
+      "inputs": {
+        "a": "X"
+      },
+      "expect": {
+        "visible": "0"
+      }
+    }
+  ]
+}
