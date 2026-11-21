@@ -20,8 +20,8 @@ def bit(value, wildcard=False):
     return value
 
 
-def compile_netlist(data):
-    fields(data, ("inputs", "gates", "flops", "outputs", "vectors"))
+def compile_circuit(data):
+    """Validate the netlist part (inputs/gates/flops/outputs) shared by v1 and v2."""
     inputs = rows(data["inputs"], "inputs", 1, 64)
     for name in inputs:
         net(name)
@@ -70,7 +70,11 @@ def compile_netlist(data):
                 heapq.heappush(ready, child)
     if len(order) != len(gates):
         raise ValueError("combinational cycle")
-    vectors = records(data["vectors"], "vector", 1, 1000)
+    return inputs, gates, flops, outputs, order
+
+
+def check_vectors(data, inputs, outputs, minimum=1, maximum=1000):
+    vectors = records(data, "vector", minimum, maximum)
     for vector in vectors.values():
         fields(vector, ("id", "inputs", "expect"))
         fields(vector["inputs"], inputs)
@@ -80,4 +84,11 @@ def compile_netlist(data):
             bit(value)
         for value in vector["expect"].values():
             bit(value, True)
+    return vectors
+
+
+def compile_netlist(data):
+    fields(data, ("inputs", "gates", "flops", "outputs", "vectors"))
+    inputs, gates, flops, outputs, order = compile_circuit(data)
+    vectors = check_vectors(data["vectors"], inputs, outputs, 1, 1000)
     return inputs, gates, flops, outputs, vectors, order

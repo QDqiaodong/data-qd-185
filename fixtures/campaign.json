@@ -1,0 +1,62 @@
+{
+  "inputs": [
+    "a"
+  ],
+  "gates": [
+    {
+      "id": "g",
+      "op": "BUF",
+      "args": [
+        "a"
+      ]
+    }
+  ],
+  "flops": [
+    {
+      "id": "q",
+      "d": "g",
+      "initial": "1"
+    }
+  ],
+  "outputs": [
+    "q"
+  ],
+  "fragments": [
+    {
+      "id": "prime",
+      "vectors": [
+        {
+          "id": "p0",
+          "inputs": {
+            "a": "1"
+          },
+          "expect": {
+            "q": "*"
+          }
+        }
+      ]
+    },
+    {
+      "id": "observe",
+      "vectors": [
+        {
+          "id": "o0",
+          "inputs": {
+            "a": "1"
+          },
+          "expect": {
+            "q": "1"
+          }
+        }
+      ]
+    }
+  ],
+  "faults": [
+    {
+      "gate": "g",
+      "stuck_at": "0"
+    }
+  ],
+  "cycle_budget": 3,
+  "reset_cost": 1
+}
