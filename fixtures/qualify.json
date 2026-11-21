@@ -1,0 +1,80 @@
+{
+  "reference": {
+    "revision": "rev-2026-a",
+    "netlist": {
+      "inputs": [
+        "a",
+        "b"
+      ],
+      "gates": [
+        {
+          "id": "g",
+          "op": "OR",
+          "args": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "flops": [],
+      "outputs": [
+        "g"
+      ]
+    }
+  },
+  "candidate": {
+    "revision": "rev-2026-b",
+    "netlist": {
+      "inputs": [
+        "b",
+        "a"
+      ],
+      "gates": [
+        {
+          "id": "g",
+          "op": "XOR",
+          "args": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "flops": [],
+      "outputs": [
+        "g"
+      ]
+    }
+  },
+  "vectors": [
+    {
+      "id": "v00",
+      "inputs": {
+        "a": "0",
+        "b": "0"
+      },
+      "expect": {
+        "g": "0"
+      }
+    },
+    {
+      "id": "v01",
+      "inputs": {
+        "a": "0",
+        "b": "1"
+      },
+      "expect": {
+        "g": "1"
+      }
+    },
+    {
+      "id": "v11",
+      "inputs": {
+        "a": "1",
+        "b": "1"
+      },
+      "expect": {
+        "g": "1"
+      }
+    }
+  ]
+}

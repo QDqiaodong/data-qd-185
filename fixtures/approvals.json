@@ -1,0 +1,14 @@
+{
+  "approvals": [
+    {
+      "reference_revision": "rev-2026-a",
+      "candidate_revision": "rev-2026-b",
+      "vector_id": "v11",
+      "output": "g",
+      "reference_value": "1",
+      "candidate_value": "0",
+      "ticket": "COURSE-142",
+      "reason": "输出门由 OR 改为 XOR 用于演示奇偶性，a&b 同为 1 时的行为变更是有意的"
+    }
+  ]
+}
