@@ -1,0 +1,8 @@
+{
+  "stream_id": "stream-7",
+  "cycle_count": 4,
+  "base": ["archive-A.json", "archive-B.json", "archive-C.json"],
+  "replace": [
+    {"shard_id": "A", "path": "archive-A-corrected.json"}
+  ]
+}

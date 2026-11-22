@@ -1,0 +1,140 @@
+{
+  "schema": "logic-replay-shard-v5",
+  "schema_version": 5,
+  "stream_id": "stream-7",
+  "shard_id": "B",
+  "first_cycle": 2,
+  "cycle_count": 1,
+  "vector_ids": [
+    "cycle-2"
+  ],
+  "netlist": {
+    "fingerprint": "93e3d5a988ed5a983a6e1efdf73d23da3f97b076107bf4c344242d7f6801f9f5",
+    "inputs": [
+      "a",
+      "b"
+    ],
+    "gate_ids": [
+      "g",
+      "h"
+    ],
+    "flop_ids": [
+      "q"
+    ],
+    "flop_initial": {
+      "q": "0"
+    },
+    "outputs": [
+      "g"
+    ]
+  },
+  "entry_states": [
+    {
+      "entry": {
+        "q": "0"
+      },
+      "key": "0",
+      "end_state": {
+        "q": "1"
+      },
+      "comparisons": 1,
+      "mismatches": [],
+      "gates": {
+        "g": {
+          "first": "0",
+          "last": "0",
+          "values": [
+            "0"
+          ]
+        },
+        "h": {
+          "first": "0",
+          "last": "0",
+          "values": [
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "entry": {
+        "q": "1"
+      },
+      "key": "1",
+      "end_state": {
+        "q": "1"
+      },
+      "comparisons": 1,
+      "mismatches": [
+        {
+          "cycle": 2,
+          "vector_id": "cycle-2",
+          "output": "g",
+          "expected": "0",
+          "actual": "1"
+        }
+      ],
+      "gates": {
+        "g": {
+          "first": "1",
+          "last": "1",
+          "values": [
+            "1"
+          ]
+        },
+        "h": {
+          "first": "0",
+          "last": "0",
+          "values": [
+            "0"
+          ]
+        }
+      }
+    },
+    {
+      "entry": {
+        "q": "X"
+      },
+      "key": "X",
+      "end_state": {
+        "q": "1"
+      },
+      "comparisons": 1,
+      "mismatches": [
+        {
+          "cycle": 2,
+          "vector_id": "cycle-2",
+          "output": "g",
+          "expected": "0",
+          "actual": "X"
+        }
+      ],
+      "gates": {
+        "g": {
+          "first": "X",
+          "last": "X",
+          "values": [
+            "X"
+          ]
+        },
+        "h": {
+          "first": "0",
+          "last": "0",
+          "values": [
+            "0"
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "stream_id": "stream-7",
+    "shard_id": "B",
+    "first_cycle": 2,
+    "cycles": 1,
+    "gates": 2,
+    "flops": 1,
+    "entry_states": 3
+  },
+  "checksum": "sha256:df3c395d4ffacdf64de56eed171d70f26e6eafb51076674bb117544e4376dd44"
+}

@@ -1,0 +1,19 @@
+{
+  "stream_id": "stream-7",
+  "shard_id": "B",
+  "first_cycle": 2,
+  "circuit": {
+    "inputs": ["a", "b"],
+    "gates": [
+      {"id": "g", "op": "BUF", "args": ["q"]},
+      {"id": "h", "op": "BUF", "args": ["b"]}
+    ],
+    "flops": [
+      {"id": "q", "d": "a", "initial": "0"}
+    ],
+    "outputs": ["g"]
+  },
+  "vectors": [
+    {"id": "cycle-2", "inputs": {"a": "1", "b": "0"}, "expect": {"g": "0"}}
+  ]
+}
