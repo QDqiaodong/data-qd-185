@@ -3,3 +3,5 @@
 `shard/` 子目录为 v5 分片归档与整批更正对账的原创样例：`pack-*.json` 是三个独立工位的分段打包输入（原始刺激只在工位侧），`archive-*.json` 是由 `--pack-shard` 实际生成、带校验和的归档，`manifest*.json` 是中心清单，其中 `manifest-corrected.json` 演示只替换 A 段、B/C 不重传的整批更正。
 
 `audit/handoff-512.json` 为 v6 排空采集事务审计的分钟交接原创样例，由 `tools/generate_audit_handoff.py` 离线生成（无触发器、短序号向量 ID）：512 行中前 256 行每行一个同标签同等级请求、后 256 行每行一个同标签应答，每个请求都有 256 个可行应答，迟到界为 [0, 255]。
+
+`soak/handoff-1e12.json` 为 v7 耐久记录对账的万亿时钟交接原创样例，由 `tools/generate_soak_handoff.py` 离线生成（只记保持段与探针网格，不含逐周期向量）：两段共 10¹² 时钟，密/疏两个探针的确切采样数、失配数、首次触发时钟与四行冻结窗口由自动化测试逐值核对。

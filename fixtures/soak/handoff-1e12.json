@@ -1,0 +1,67 @@
+{
+  "circuit": {
+    "inputs": [
+      "a"
+    ],
+    "gates": [
+      {
+        "id": "g",
+        "op": "XOR",
+        "args": [
+          "q",
+          "a"
+        ]
+      }
+    ],
+    "flops": [
+      {
+        "id": "q",
+        "d": "g",
+        "initial": "0"
+      }
+    ],
+    "outputs": [
+      "q"
+    ]
+  },
+  "holds": [
+    {
+      "id": "A",
+      "ticks": 800000000001,
+      "inputs": {
+        "a": "1"
+      }
+    },
+    {
+      "id": "B",
+      "ticks": 199999999999,
+      "inputs": {
+        "a": "0"
+      }
+    }
+  ],
+  "monitors": [
+    {
+      "id": "dense",
+      "output": "q",
+      "first": 0,
+      "through": 999999999999,
+      "stride": 1,
+      "expected": "0",
+      "trip_after": 2
+    },
+    {
+      "id": "sparse",
+      "output": "q",
+      "first": 1,
+      "through": 999999999999,
+      "stride": 200000000,
+      "expected": "0",
+      "trip_after": 4001
+    }
+  ],
+  "capture": {
+    "before": 2,
+    "after": 1
+  }
+}

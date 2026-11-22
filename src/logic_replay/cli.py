@@ -7,6 +7,7 @@ from .qualify import run_qualify
 from .recover import run_recover
 from .service import run
 from .shard import run_pack_shard, run_rollup_shards
+from .soak import run_soak
 
 
 def main():
@@ -19,6 +20,7 @@ def main():
     mode.add_argument("--pack-shard", help="v5 工位分片归档输入 JSON")
     mode.add_argument("--rollup-shards", help="v5 中心分片归并与更正清单 JSON")
     mode.add_argument("--audit-transfers", help="v6 排空采集事务审计输入 JSON")
+    mode.add_argument("--soak-check", help="v7 耐久记录对账与保护定位输入 JSON")
     parser.add_argument("--approvals", help="v3 授权清单 JSON（仅与 --qualify 同用）")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
@@ -39,6 +41,8 @@ def main():
             result = run_rollup_shards(load(args.rollup_shards), args.rollup_shards)
         elif args.audit_transfers is not None:
             result = run_audit(load(args.audit_transfers))
+        elif args.soak_check is not None:
+            result = run_soak(load(args.soak_check))
         else:
             result = run(load(args.source))
         publish(args.output, result)
