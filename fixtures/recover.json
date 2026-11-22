@@ -1,0 +1,29 @@
+{
+  "inputs": ["a"],
+  "gates": [
+    {
+      "id": "next_q",
+      "op": "OR",
+      "args": ["q", "a"]
+    }
+  ],
+  "flops": [
+    {
+      "id": "q",
+      "d": "next_q",
+      "initial": "0"
+    }
+  ],
+  "outputs": ["q"],
+  "rows": [
+    {"id": "t0", "inputs": {}, "observed": {}},
+    {"id": "t1", "inputs": {"a": "0"}, "observed": {}},
+    {"id": "t2", "inputs": {"a": "0"}, "observed": {}},
+    {"id": "t3", "inputs": {"a": "1"}, "observed": {"q": "1"}},
+    {"id": "t4", "inputs": {"a": "0"}, "observed": {}}
+  ],
+  "windows": [
+    {"id": "review-t2", "from": "t2", "through": "t2"},
+    {"id": "review-t4", "from": "t4", "through": "t4"}
+  ]
+}

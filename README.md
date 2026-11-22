@@ -42,10 +42,25 @@ uv pip check --python .venv/bin/python
 
 预期：参考契约有效，候选版在 `v11`/`g` 的偏差（参考"1"、候选"0"）获 COURSE-142 授权记为已批准变更，0 未批准回归、0 过期授权，`eligible=true`。把 `--approvals` 换成空清单则同一偏差成为未批准回归，`eligible=false`，仍退出0并出报告。
 
+采集恢复与回放包导出演示（与前述模式互斥、不得搭配 `--approvals` 的 `--recover` 入口）：
+
+```sh
+.venv/bin/logic-replay --recover fixtures/recover.json --output run/recover.json
+```
+
+预期：采集一致，`t0` 的漏记输入被 `t3` 的晚到采样唯一补回为"1"，其余格原样记录。窗口 `review-t2` 交接成功，入口状态 `q="1"`，须预热 `t0`、`t1`（仅 `t1` 从初值出发到不了该状态）；窗口 `review-t4` 只预热 `t3`，该预热行 `expect` 为空。两个窗口都带一个可保存为 JSON、直接喂给 `--source` 的 `replay_package`：
+
+```sh
+.venv/bin/python -c 'import json;print(json.dumps(json.load(open("run/recover.json"))["windows"][1]["replay_package"]))' > run/package-t4.json
+.venv/bin/logic-replay --source run/package-t4.json --output run/package-t4-report.json
+```
+
+预期回放包自身全部期望匹配，窗口首周期的边沿前状态等于报告的 `entry_state`；预热期间的未采样输出没有被填成期望。
+
 成功退出0；业务质量提示或诊断不等于输入失败，见summary。非法输入或已有目标退出2，保留旧目标。JSON最多8MB，拒绝重复键、未知字段及非有限常量。先完整验证与计算，再同目录临时文件原子硬链接新建一个JSON报告。run/已忽略。
 
 ## 数据契约和边界
 
-不是HDL/FPGA工具，没有延迟或模拟电压；X是未知值，期望中的*才表示不比较。 字段、单位、顺序及失败约定详见[契约](docs/contract.md)；排程输入与报告见[排程契约](docs/campaign.md)；资格认定输入、授权与报告见[资格认定契约](docs/qualify.md)。
+不是HDL/FPGA工具，没有延迟或模拟电压；X是未知值，期望中的*才表示不比较。 字段、单位、顺序及失败约定详见[契约](docs/contract.md)；排程输入与报告见[排程契约](docs/campaign.md)；资格认定输入、授权与报告见[资格认定契约](docs/qualify.md)；采集恢复与回放包见[恢复契约](docs/recover.md)。
 
 样例全部为原创合成数据，见[来源](fixtures/SOURCES.md)。代码和样例MIT许可；业务命令和测试不访问网络、不启动容器。功能边界以实际源码和契约为准。

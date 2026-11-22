@@ -3,6 +3,7 @@ import json
 from .campaign import run_campaign
 from .io import load, publish
 from .qualify import run_qualify
+from .recover import run_recover
 from .service import run
 
 
@@ -12,6 +13,7 @@ def main():
     mode.add_argument("--source", help="v1 顺序回放输入 JSON")
     mode.add_argument("--campaign", help="v2 故障覆盖排程输入 JSON")
     mode.add_argument("--qualify", help="v3 跨版本资格认定输入 JSON")
+    mode.add_argument("--recover", help="v4 采集恢复与回放包导出输入 JSON")
     parser.add_argument("--approvals", help="v3 授权清单 JSON（仅与 --qualify 同用）")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
@@ -24,6 +26,8 @@ def main():
             result = run_campaign(load(args.campaign))
         elif args.qualify is not None:
             result = run_qualify(load(args.qualify), load(args.approvals))
+        elif args.recover is not None:
+            result = run_recover(load(args.recover))
         else:
             result = run(load(args.source))
         publish(args.output, result)
